@@ -9,7 +9,7 @@ public class KeyInput implements KeyListener {
 
     public void keyPressed(KeyEvent e) {
         int keyPressed = e.getKeyChar();
-        System.out.println("Key Pressed: " + keyPressed);
+
         if (keyPressed == 'w') {
             upPressed = true;
         }
@@ -26,7 +26,7 @@ public class KeyInput implements KeyListener {
 
     public void keyReleased(KeyEvent e) {
         int keyReleased = e.getKeyChar();
-        System.out.println("Key Released: " + keyReleased);
+
         if (keyReleased == 'w') {
             upPressed = false;
         }

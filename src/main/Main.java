@@ -7,6 +7,6 @@ public class Main extends JFrame {
     public static void main(String[] args) {
         Canvas canvas = new Canvas();
 
-        Canvas.startGameThread();
+        canvas.startGameThread();
     }
 }

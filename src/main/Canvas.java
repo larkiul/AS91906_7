@@ -15,8 +15,8 @@ public class Canvas extends JFrame implements Runnable {
     final int FPS = 60;
     public int playerX = CANVAS_WIDTH / 2 - PLAYER_SIZE / 2;
     public int playerY = CANVAS_HEIGHT / 2 - PLAYER_SIZE / 2;
-    public int playerSpeed = 5;
-    Thread gameThread;
+    public int playerSpeed = 2;
+    Thread gameThread; // This thread allows for the game to be run while all other aspects can still work, like the paint method
 
     public Canvas() {
         setTitle("game");
@@ -33,16 +33,43 @@ public class Canvas extends JFrame implements Runnable {
         this.setFocusable(true);
     }
 
-    public void startGameThread() {
+    public void startGameThread() { // Initialise the thread
 
         gameThread = new Thread(this);
-        gameThread.start();
+        gameThread.start(); // Start thread
     }
 
-    public void run() {
-        while (gameThread != null) {
-            System.out.println("fgsd");
+    public void run() { // Contains code for the thread to run
+
+        /**
+         * Game loop 'delta' method
+         *
+         * Limits the game loop to only be run 60 times per second (FPS)
+         * Without this, the game loop would be run as soon as the loop is finished, so it could be run 1 000s or 1 000 000s of times per second
+         * Thread has no built-in limiting factor to how many times it's run per second so 'delta' is required
+        **/
+
+        double drawInterval = 1000000000 / FPS; // Time between frames, recorded in nanoseconds (1 second = 1 * 10^9 nanoseconds)
+        double delta = 0;
+        long lastTime = System.nanoTime(); // Records time (in nanoseconds) before loop begins, System.nanoTime() allows for more precise measurements
+        long currentTime;
+
+        while (gameThread != null) { // While the thread is active, the game loop is continuously ran
+
+            currentTime = System.nanoTime(); // Finds the current elapsed time
+            delta += (currentTime - lastTime) / drawInterval; // Elapsed time is converted to value 0 - 1
+            lastTime = currentTime; // Last time is updated
+
+            if (delta >= 1) { // Only once delta reaches 1 or more, is a new frame drawn, this happens 60 times per second in my game
+                update();
+                repaint();
+                delta--; // Returns delta to 0
+            }
         }
+    }
+
+    public void update() {
+        playerMove();
     }
 
     public void playerMove() {
@@ -56,7 +83,7 @@ public class Canvas extends JFrame implements Runnable {
             playerX -= playerSpeed;
         }
         if (keyInput.rightPressed){
-            playerY += playerSpeed;
+            playerX += playerSpeed;
         }
     }
 
@@ -68,7 +95,6 @@ public class Canvas extends JFrame implements Runnable {
 
                 g2.setColor(Color.RED);
                 g2.fillOval(playerX, playerY, PLAYER_SIZE, PLAYER_SIZE);
-                //image.paintIcon(this, g, 50, 50);
         }
     }
 }
