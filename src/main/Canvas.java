@@ -13,9 +13,13 @@ public class Canvas extends JFrame implements Runnable {
     final int CANVAS_HEIGHT = 800;
     final int PLAYER_SIZE = 20;
     final int FPS = 60;
-    public int playerX = CANVAS_WIDTH / 2 - PLAYER_SIZE / 2;
+    final int JUMP_STRENGTH = 5;
+    public int playerX = CANVAS_WIDTH / 2 + PLAYER_SIZE / 2;
     public int playerY = CANVAS_HEIGHT / 2 - PLAYER_SIZE / 2;
-    public int playerSpeed = 2;
+    public int playerHorizontalSpeed = 2;
+    public int playerVerticalSpeed = 2;
+    public int gravity = 1;
+    public int ground = 500;
     Thread gameThread; // This thread allows for the game to be run while all other aspects can still work, like the paint method
 
     public Canvas() {
@@ -69,21 +73,59 @@ public class Canvas extends JFrame implements Runnable {
     }
 
     public void update() {
+        //playerSpeed = 2;
         playerMove();
+        //fall();
     }
 
     public void playerMove() {
-        if (keyInput.upPressed){
-            playerY -= playerSpeed;
-        }
+
         if (keyInput.downPressed){
-            playerY += playerSpeed;
+            //playerY += playerVerticalSpeed;
         }
         if (keyInput.leftPressed){
-            playerX -= playerSpeed;
+            playerX -= playerHorizontalSpeed;
         }
         if (keyInput.rightPressed){
-            playerX += playerSpeed;
+            playerX += playerHorizontalSpeed;
+        }
+
+        if (playerX < 0){
+            playerX = 0;
+        }
+        if (playerX + PLAYER_SIZE > CANVAS_WIDTH){
+            playerX = CANVAS_WIDTH - PLAYER_SIZE;
+        }
+        if (playerX < 0){
+            playerX = 0;
+        }
+        if (playerX < 0){
+            playerX = 0;
+        }
+        if (playerY + PLAYER_SIZE * 2 > ground){
+            playerY =  ground - PLAYER_SIZE;
+        }
+
+        //if (playerY + PLAYER_SIZE < ground) {
+            fall();
+        //}
+    }
+
+    public void accelerate(double accelerationX, double accelerationY){
+
+    }
+
+    public void fall(){
+        if (playerY + PLAYER_SIZE <= ground) {
+            if (keyInput.upPressed) {
+                playerVerticalSpeed = JUMP_STRENGTH;
+                playerY -= playerVerticalSpeed;
+                System.out.println("hye");
+            }
+            if (!keyInput.upPressed) {
+                playerVerticalSpeed += gravity;
+                playerY += playerVerticalSpeed;
+            }
         }
     }
 
@@ -95,6 +137,9 @@ public class Canvas extends JFrame implements Runnable {
 
                 g2.setColor(Color.RED);
                 g2.fillOval(playerX, playerY, PLAYER_SIZE, PLAYER_SIZE);
+
+                g2.setColor(Color.BLACK);
+                g2.drawLine(0, ground, CANVAS_WIDTH, ground);
         }
     }
 }
