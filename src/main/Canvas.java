@@ -7,15 +7,15 @@ import java.awt.event.*;
 
 public class Canvas extends JFrame implements Runnable {
 
-    KeyInput keyInput = new KeyInput();
+    //KeyInput keyInput = new KeyInput();
     Player playerClass = new Player();
     Canvas myGraphic;
-    final int CANVAS_WIDTH = 800;
-    final int CANVAS_HEIGHT = 800;
+    public final int CANVAS_WIDTH = 800;
+    public final int CANVAS_HEIGHT = 800;
 
     final int FPS = 60;
 
-    public int ground = 500;
+    public int ground = 700;
     Thread gameThread; // This thread allows for the game to be run while all other aspects can still work, like the paint method
 
     public Canvas() {
@@ -29,7 +29,7 @@ public class Canvas extends JFrame implements Runnable {
         this.setContentPane(new JPanelTest());
 
 
-        this.addKeyListener(keyInput);
+        this.addKeyListener(playerClass.keyInput);
         this.setFocusable(true);
     }
 
@@ -86,6 +86,7 @@ public class Canvas extends JFrame implements Runnable {
                 g2.fillOval(playerClass.playerX, playerClass.playerY, playerClass.PLAYER_SIZE, playerClass.PLAYER_SIZE);
 
                 g2.setColor(Color.BLACK);
+                g2.fillOval(playerClass.playerX, playerClass.playerY, 5, 5);
                 g2.drawLine(0, ground, CANVAS_WIDTH, ground);
         }
     }
