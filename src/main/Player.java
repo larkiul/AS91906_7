@@ -6,17 +6,20 @@ public class Player {
     final int JUMP_STRENGTH = -15;
     final int CANVAS_WIDTH = 800;
     final int CANVAS_HEIGHT = 800;
+    final int TERMINAL_VEL = 35;
     int ground = 700;
     public int playerX = CANVAS_WIDTH / 2 + PLAYER_SIZE / 2;
     public int playerY = CANVAS_HEIGHT / 2 - PLAYER_SIZE / 2;
     public int playerHorizontalSpeed = 0;
     public int playerVerticalSpeed = 0;
-
-
     public int gravity = 1;
+    public int jumpDelay = 0;
+    public boolean buttonHeld = false;
+
     public void playerMove() {
+
         fall();
-        //playerY += playerVerticalSpeed;
+
         playerX += playerHorizontalSpeed;
 
         if (keyInput.leftPressed){
@@ -31,9 +34,6 @@ public class Player {
             playerHorizontalSpeed = 0;
         }
 
-
-
-
         if (playerX < 0){
             playerX = 0;
         }
@@ -45,27 +45,33 @@ public class Player {
             playerVerticalSpeed *= -1;
         }
         if (playerY + PLAYER_SIZE > ground){
-            playerY =  ground - PLAYER_SIZE;
+            playerY = ground - PLAYER_SIZE;
         }
-
-    }
-
-    public void accelerate(double accelerationX, double accelerationY){
-
     }
 
     public void fall(){
 
-        if (keyInput.upPressed && playerY + PLAYER_SIZE == ground) {
+        if (keyInput.upPressed && playerY + PLAYER_SIZE == ground && jumpDelay == 0 && !buttonHeld) {
+            buttonHeld = true;
+            jumpDelay = 35;
             playerVerticalSpeed = JUMP_STRENGTH;
             playerY += playerVerticalSpeed;
-            System.out.println("hye");
         }
-        if (playerY + PLAYER_SIZE < ground) {
 
-            playerVerticalSpeed += gravity;
+        if (!keyInput.upPressed){
+            buttonHeld = false;
+        }
+
+        if (playerY + PLAYER_SIZE < ground ) {
+            if (playerVerticalSpeed < TERMINAL_VEL) {
+                playerVerticalSpeed += gravity;
+            }
             playerY += playerVerticalSpeed;
+            System.out.println(playerVerticalSpeed);
+        }
 
+        if (jumpDelay > 0){
+            jumpDelay--;
         }
     }
 }
