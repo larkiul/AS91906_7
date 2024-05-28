@@ -20,6 +20,8 @@ public class Player {
 
         fall();
 
+
+
         playerX += playerHorizontalSpeed;
 
         if (keyInput.leftPressed){
@@ -34,19 +36,7 @@ public class Player {
             playerHorizontalSpeed = 0;
         }
 
-        if (playerX < 0){
-            playerX = 0;
-        }
-        if (playerX + PLAYER_SIZE > CANVAS_WIDTH){
-            playerX = CANVAS_WIDTH - PLAYER_SIZE;
-        }
-        if (playerY < 0){
-            playerY = 0;
-            playerVerticalSpeed *= -1;
-        }
-        if (playerY + PLAYER_SIZE > ground){
-            playerY = ground - PLAYER_SIZE;
-        }
+        playerCollisions();
     }
 
     public void fall(){
@@ -67,11 +57,27 @@ public class Player {
                 playerVerticalSpeed += gravity;
             }
             playerY += playerVerticalSpeed;
-            System.out.println(playerVerticalSpeed);
         }
 
         if (jumpDelay > 0){
             jumpDelay--;
+        }
+    }
+
+    public void playerCollisions(){
+
+        if (playerX < 0){
+            playerX = 0;
+        }
+        if (playerX + PLAYER_SIZE > CANVAS_WIDTH){
+            playerX = CANVAS_WIDTH - PLAYER_SIZE;
+        }
+        if (playerY < 0){
+            playerY = 0;
+            playerVerticalSpeed *= -1;
+        }
+        if (playerY + PLAYER_SIZE > ground){
+            playerY = ground - PLAYER_SIZE;
         }
     }
 }
