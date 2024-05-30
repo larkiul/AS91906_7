@@ -2,7 +2,7 @@ package main;
 
 public class Platform {
 
-    Player playerClass = new Player();
+    //Player playerClass = new Player();
     public int x;
     public int y;
     public int width;
@@ -13,13 +13,7 @@ public class Platform {
         this.y = y;
         this.width = width;
         this.height = height;
-        playerCollisions();
     }
 
-    public void playerCollisions(){
 
-        if (playerClass.playerY > y){
-            playerClass.playerY = y;
-        }
-    }
 }

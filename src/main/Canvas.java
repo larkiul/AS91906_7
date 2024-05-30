@@ -9,13 +9,14 @@ public class Canvas extends JFrame implements Runnable {
 
     Platform platOne = new Platform(100, 600, 100, 20);
     Platform platTwo = new Platform(600, 600, 100, 20);
+    Platform ground = new Platform(0, 700, 800, 100);
     Player playerClass = new Player();
     public final int CANVAS_WIDTH = 800;
     public final int CANVAS_HEIGHT = 800;
 
     final int FPS = 60;
 
-    public int ground = 700;
+    //public int ground = 700;
     Thread gameThread; // This thread allows for the game to be run while all other aspects can still work, like the paint method
 
     public Canvas() {
@@ -74,8 +75,10 @@ public class Canvas extends JFrame implements Runnable {
 
         playerClass.playerMove();
 
-        platOne.playerCollisions();
+
     }
+
+
 
 
 
@@ -89,9 +92,9 @@ public class Canvas extends JFrame implements Runnable {
             g2.fillOval(playerClass.playerX, playerClass.playerY, playerClass.PLAYER_SIZE, playerClass.PLAYER_SIZE);
 
             g2.setColor(Color.BLACK);
-            g2.drawLine(0, ground, CANVAS_WIDTH, ground);
             g2.fillRect(platOne.x, platOne.y, platOne.width, platOne.height);
             g2.fillRect(platTwo.x, platTwo.y, platTwo.width, platTwo.height);
+            g2.fillRect(ground.x, ground.y, ground.width, ground.height);
         }
     }
 }
