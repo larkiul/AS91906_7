@@ -2,9 +2,6 @@ package main;
 
 public class Player {
     KeyInput keyInput = new KeyInput();
-    Platform ground = new Platform(0, 700, 800, 100);
-    Platform platOne = new Platform(100, 600, 100, 20);
-    Platform platTwo = new Platform(600, 600, 100, 20);
     final int PLAYER_SIZE = 20;
     final int JUMP_STRENGTH = -15;
     final int CANVAS_WIDTH = 800;
@@ -42,7 +39,7 @@ public class Player {
 
     public void fall(){
 
-        if (keyInput.upPressed && playerY + PLAYER_SIZE == ground.y && jumpDelay == 0 && !buttonHeld) {
+        if (keyInput.upPressed && jumpDelay == 0 && !buttonHeld) {
             buttonHeld = true;
             jumpDelay = 35;
             playerVerticalSpeed = JUMP_STRENGTH;
@@ -53,12 +50,12 @@ public class Player {
             buttonHeld = false;
         }
 
-        if (playerY + PLAYER_SIZE < ground.y) {
+        //if (playerY + PLAYER_SIZE < ground.y) {
             if (playerVerticalSpeed < TERMINAL_VEL) {
                 playerVerticalSpeed += gravity;
             }
             playerY += playerVerticalSpeed;
-        }
+        //}
 
         if (jumpDelay > 0){
             jumpDelay--;
@@ -77,35 +74,10 @@ public class Player {
             playerY = 0;
             playerVerticalSpeed *= -1;
         }
-        if (playerY + PLAYER_SIZE > ground.y){
-            playerY = ground.y - PLAYER_SIZE;
-        }
-
-        if (collisionTop(playerX, playerY, PLAYER_SIZE, PLAYER_SIZE, 600, 600, 100, 20)){
-            //System.out.println("hello");
-            if (playerY + PLAYER_SIZE >= platOne.y && playerY + PLAYER_SIZE <= platOne.y + platOne.height / 2) {
-                playerY = platTwo.y - PLAYER_SIZE;
-            }
-            if (playerY <= platTwo.y + platTwo.height && playerY >= platTwo.y + platTwo.height / 2) {
-                playerY = platTwo.y + platTwo.width;
-            }
-            if (playerY + PLAYER_SIZE >= 600) {
-                //playerY = platTwo.y - PLAYER_SIZE;
-            }
-            if (playerY + PLAYER_SIZE >= 600) {
-                //playerY = platTwo.y - PLAYER_SIZE;
-            }
-        }
-
-
-
-    }
-
-    public Boolean collisionTop(int x1, int y1, int w1, int h1, int x2, int y2, int w2, int h2){
-        if (x1 + w1 >= x2 && x1 <= x2 + w2 && y1 + h1 > y2 && y1 <= y2 + h2){
-            return true;
-        } else {
-            return false;
+        if (playerY > CANVAS_HEIGHT){
+            playerY = 0;
         }
     }
+
+
 }

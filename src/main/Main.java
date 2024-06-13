@@ -8,5 +8,7 @@ public class Main extends JFrame {
         Canvas canvas = new Canvas();
 
         canvas.startGameThread();
+
+
     }
 }

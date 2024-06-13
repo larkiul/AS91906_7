@@ -2,7 +2,6 @@ package main;
 
 public class Platform {
 
-    //Player playerClass = new Player();
     public int x;
     public int y;
     public int width;

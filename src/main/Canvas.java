@@ -78,9 +78,24 @@ public class Canvas extends JFrame implements Runnable {
 
         playerClass.playerMove();
 
+        for (int i = 0; i < platforms.size(); i++){
+            if (collision(playerClass.playerX, playerClass.playerY, playerClass.PLAYER_SIZE, playerClass.PLAYER_SIZE, platforms.get(i).x, platforms.get(i).y, platforms.get(i).width, platforms.get(i).height)){
+                System.out.println("hel");
+                playerClass.playerVerticalSpeed = 0;
+                playerClass.playerVerticalSpeed -= 1;
+                //playerClass.playerY -= playerClass.PLAYER_SIZE / 2;
+                //playerClass.playerY = 0;
+            }
+        }
     }
 
-
+    public Boolean collision(int x1, int y1, int w1, int h1, int x2, int y2, int w2, int h2){
+        if (x1 + w1 >= x2 && x1 <= x2 + w2 && y1 + h1 > y2 && y1 <= y2 + h2){
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 
 
