@@ -23,8 +23,6 @@ public class Player {
 
         fall();
 
-
-
         playerX += playerHorizontalSpeed;
 
         if (keyInput.leftPressed){
@@ -83,14 +81,27 @@ public class Player {
             playerY = ground.y - PLAYER_SIZE;
         }
 
-        if (collision(playerX, playerY, PLAYER_SIZE, PLAYER_SIZE, 600, 600, 100, 20)){
-            playerY = platTwo.y - PLAYER_SIZE;
+        if (collisionTop(playerX, playerY, PLAYER_SIZE, PLAYER_SIZE, 600, 600, 100, 20)){
+            //System.out.println("hello");
+            if (playerY + PLAYER_SIZE >= platOne.y && playerY + PLAYER_SIZE <= platOne.y + platOne.height / 2) {
+                playerY = platTwo.y - PLAYER_SIZE;
+            }
+            if (playerY <= platTwo.y + platTwo.height && playerY >= platTwo.y + platTwo.height / 2) {
+                playerY = platTwo.y + platTwo.width;
+            }
+            if (playerY + PLAYER_SIZE >= 600) {
+                //playerY = platTwo.y - PLAYER_SIZE;
+            }
+            if (playerY + PLAYER_SIZE >= 600) {
+                //playerY = platTwo.y - PLAYER_SIZE;
+            }
         }
+
 
 
     }
 
-    public Boolean collision(int x1, int y1, int w1, int h1, int x2, int y2, int w2, int h2){
+    public Boolean collisionTop(int x1, int y1, int w1, int h1, int x2, int y2, int w2, int h2){
         if (x1 + w1 >= x2 && x1 <= x2 + w2 && y1 + h1 > y2 && y1 <= y2 + h2){
             return true;
         } else {

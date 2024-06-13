@@ -3,6 +3,7 @@ package main;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 
 public class Canvas extends JFrame implements Runnable {
@@ -15,8 +16,8 @@ public class Canvas extends JFrame implements Runnable {
     public final int CANVAS_HEIGHT = 800;
 
     final int FPS = 60;
+    ArrayList<Platform> platforms = new ArrayList<Platform>();
 
-    //public int ground = 700;
     Thread gameThread; // This thread allows for the game to be run while all other aspects can still work, like the paint method
 
     public Canvas() {
@@ -33,7 +34,9 @@ public class Canvas extends JFrame implements Runnable {
         this.addKeyListener(playerClass.keyInput);
         this.setFocusable(true);
 
-
+        platforms.add(new Platform(0, 700, 800, 100));
+        platforms.add(new Platform(600, 600, 100, 20));
+        platforms.add(new Platform(100, 600, 100, 20));
     }
 
     public void startGameThread() { // Initialise the thread
@@ -75,7 +78,6 @@ public class Canvas extends JFrame implements Runnable {
 
         playerClass.playerMove();
 
-
     }
 
 
@@ -92,9 +94,9 @@ public class Canvas extends JFrame implements Runnable {
             g2.fillOval(playerClass.playerX, playerClass.playerY, playerClass.PLAYER_SIZE, playerClass.PLAYER_SIZE);
 
             g2.setColor(Color.BLACK);
-            g2.fillRect(platOne.x, platOne.y, platOne.width, platOne.height);
-            g2.fillRect(platTwo.x, platTwo.y, platTwo.width, platTwo.height);
-            g2.fillRect(ground.x, ground.y, ground.width, ground.height);
+            for (int i = 0; i < platforms.size(); i++){
+                g2.fillRect(platforms.get(i).x, platforms.get(i).y, platforms.get(i).width, platforms.get(i).height);
+            }
         }
     }
 }
