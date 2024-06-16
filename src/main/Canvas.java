@@ -36,7 +36,7 @@ public class Canvas extends JFrame implements Runnable {
 
         platforms.add(new Platform(0, 700, 800, 100));
         platforms.add(new Platform(600, 600, 100, 20));
-        platforms.add(new Platform(100, 600, 100, 20));
+        platforms.add(new Platform(100, 600, 100, 200));
     }
 
     public void startGameThread() { // Initialise the thread
@@ -80,11 +80,18 @@ public class Canvas extends JFrame implements Runnable {
 
         for (int i = 0; i < platforms.size(); i++){
             if (collision(playerClass.playerX, playerClass.playerY, playerClass.PLAYER_SIZE, playerClass.PLAYER_SIZE, platforms.get(i).x, platforms.get(i).y, platforms.get(i).width, platforms.get(i).height)){
-                System.out.println("hel");
-                playerClass.playerVerticalSpeed = 0;
-                playerClass.playerVerticalSpeed -= 1;
-                //playerClass.playerY -= playerClass.PLAYER_SIZE / 2;
-                //playerClass.playerY = 0;
+
+                if (playerClass.playerY + playerClass.PLAYER_SIZE > platforms.get(i).y && playerClass.playerY + playerClass.PLAYER_SIZE < platforms.get(i).y + platforms.get(i).height){
+                    playerClass.playerY = platforms.get(i).y - playerClass.PLAYER_SIZE;
+                    playerClass.playerVerticalSpeed = 0;
+                }
+                if (playerClass.playerY < platforms.get(i).y + platforms.get(i).height && playerClass.playerY > platforms.get(i).y + platforms.get(i).height / 2){
+                    playerClass.playerY = platforms.get(i).y + platforms.get(i).height;
+                    playerClass.playerVerticalSpeed = 0;
+                }
+                if (playerClass.playerX + playerClass.PLAYER_SIZE > platforms.get(i).x){
+                    playerClass.playerHorizontalSpeed = 0;
+                }
             }
         }
     }
@@ -106,7 +113,7 @@ public class Canvas extends JFrame implements Runnable {
             Graphics2D g2 = (Graphics2D) g;
 
             g2.setColor(Color.RED);
-            g2.fillOval(playerClass.playerX, playerClass.playerY, playerClass.PLAYER_SIZE, playerClass.PLAYER_SIZE);
+            g2.fillRect(playerClass.playerX, playerClass.playerY, playerClass.PLAYER_SIZE, playerClass.PLAYER_SIZE);
 
             g2.setColor(Color.BLACK);
             for (int i = 0; i < platforms.size(); i++){
