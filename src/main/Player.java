@@ -8,7 +8,7 @@ public class Player {
     final int CANVAS_HEIGHT = 800;
     final int TERMINAL_VEL = 35;
     //int ground = 700;
-    public int playerX = CANVAS_WIDTH / 2 + PLAYER_SIZE / 2;
+    public int playerX = 200;
     public int playerY = CANVAS_HEIGHT / 2 - PLAYER_SIZE / 2;
     public int playerHorizontalSpeed = 0;
     public int playerVerticalSpeed = 0;
@@ -21,7 +21,7 @@ public class Player {
 
         fall();
 
-        playerX += playerHorizontalSpeed;
+        //playerX += playerHorizontalSpeed;
 
         if (keyInput.leftPressed){
             playerHorizontalSpeed = -2;

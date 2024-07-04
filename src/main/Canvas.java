@@ -10,7 +10,7 @@ public class Canvas extends JFrame implements Runnable {
     Player playerClass = new Player();
     public final int CANVAS_WIDTH = 800;
     public final int CANVAS_HEIGHT = 800;
-    public int platformSpeed = 2;
+    public int platformSpeed = 3;
     final int FPS = 60;
     ArrayList<Platform> platforms = new ArrayList<Platform>();
     Thread gameThread; // This thread allows for the game to be run while all other aspects can still work, like the paint method
@@ -29,8 +29,11 @@ public class Canvas extends JFrame implements Runnable {
         this.setFocusable(true);
 
         platforms.add(new Platform(0, 700, CANVAS_WIDTH, 100));
-        platforms.add(new Platform(600, 600, 100, 20));
-        platforms.add(new Platform(100, 600, 100, 20));
+        platforms.add(new Platform((int) (Math.floor(Math.random() * CANVAS_WIDTH) + CANVAS_WIDTH), (int) (Math.floor(Math.random() * 200) + 500), 100, 10));
+        platforms.add(new Platform((int) (Math.floor(Math.random() * CANVAS_WIDTH) + CANVAS_WIDTH), (int) (Math.floor(Math.random() * 200) + 500), 100, 10));
+        platforms.add(new Platform((int) (Math.floor(Math.random() * CANVAS_WIDTH) + CANVAS_WIDTH), (int) (Math.floor(Math.random() * 200) + 500), 100, 10));
+        platforms.add(new Platform((int) (Math.floor(Math.random() * CANVAS_WIDTH) + CANVAS_WIDTH), (int) (Math.floor(Math.random() * 200) + 500), 100, 10));
+        platforms.add(new Platform((int) (Math.floor(Math.random() * CANVAS_WIDTH) + CANVAS_WIDTH), (int) (Math.floor(Math.random() * 200) + 500), 100, 10));
     }
 
     public void startGameThread() { // Initialise the thread
@@ -72,12 +75,16 @@ public class Canvas extends JFrame implements Runnable {
 
         playerClass.playerMove();
 
-        System.out.println(platforms);
+        //System.out.println(platforms);
 
         for (int i = 0; i < platforms.size(); i++){
             platforms.get(i).x -= platformSpeed;
             if (platforms.get(i).x + platforms.get(i).width < 0){
-                platforms.remove(Platform);
+                platforms.get(i).x = (int) (Math.floor(Math.random() * CANVAS_WIDTH) + CANVAS_WIDTH);
+                platforms.get(i).y = (int) (Math.floor(Math.random() * 200) + 500);
+            }
+            if (i == 0){
+                platforms.get(i).x += platformSpeed;
             }
             if (collision(playerClass.playerX, playerClass.playerY, playerClass.PLAYER_SIZE, playerClass.PLAYER_SIZE, platforms.get(i).x, platforms.get(i).y, platforms.get(i).width, platforms.get(i).height) && playerClass.playerVerticalSpeed > 0){
                 playerClass.playerY = platforms.get(i).y  - playerClass.PLAYER_SIZE;
