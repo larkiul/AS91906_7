@@ -7,17 +7,12 @@ import java.util.ArrayList;
 
 
 public class Canvas extends JFrame implements Runnable {
-
-    Platform platOne = new Platform(100, 600, 100, 20);
-    Platform platTwo = new Platform(600, 600, 100, 20);
-    Platform ground = new Platform(0, 700, 800, 100);
     Player playerClass = new Player();
     public final int CANVAS_WIDTH = 800;
     public final int CANVAS_HEIGHT = 800;
-
+    public int platformSpeed = 2;
     final int FPS = 60;
     ArrayList<Platform> platforms = new ArrayList<Platform>();
-
     Thread gameThread; // This thread allows for the game to be run while all other aspects can still work, like the paint method
 
     public Canvas() {
@@ -30,13 +25,12 @@ public class Canvas extends JFrame implements Runnable {
         this.setVisible(true);
         this.setContentPane(new JPanelTest());
 
-
         this.addKeyListener(playerClass.keyInput);
         this.setFocusable(true);
 
-        platforms.add(new Platform(0, 700, 800, 100));
+        platforms.add(new Platform(0, 700, CANVAS_WIDTH, 100));
         platforms.add(new Platform(600, 600, 100, 20));
-        platforms.add(new Platform(100, 600, 100, 200));
+        platforms.add(new Platform(100, 600, 100, 20));
     }
 
     public void startGameThread() { // Initialise the thread
@@ -78,20 +72,16 @@ public class Canvas extends JFrame implements Runnable {
 
         playerClass.playerMove();
 
-        for (int i = 0; i < platforms.size(); i++){
-            if (collision(playerClass.playerX, playerClass.playerY, playerClass.PLAYER_SIZE, playerClass.PLAYER_SIZE, platforms.get(i).x, platforms.get(i).y, platforms.get(i).width, platforms.get(i).height)){
+        System.out.println(platforms);
 
-                if (playerClass.playerY + playerClass.PLAYER_SIZE > platforms.get(i).y && playerClass.playerY + playerClass.PLAYER_SIZE < platforms.get(i).y + platforms.get(i).height){
-                    playerClass.playerY = platforms.get(i).y - playerClass.PLAYER_SIZE;
-                    playerClass.playerVerticalSpeed = 0;
-                }
-                if (playerClass.playerY < platforms.get(i).y + platforms.get(i).height && playerClass.playerY > platforms.get(i).y + platforms.get(i).height / 2){
-                    playerClass.playerY = platforms.get(i).y + platforms.get(i).height;
-                    playerClass.playerVerticalSpeed = 0;
-                }
-                if (playerClass.playerX + playerClass.PLAYER_SIZE > platforms.get(i).x){
-                    playerClass.playerHorizontalSpeed = 0;
-                }
+        for (int i = 0; i < platforms.size(); i++){
+            platforms.get(i).x -= platformSpeed;
+            if (platforms.get(i).x + platforms.get(i).width < 0){
+                platforms.remove(Platform);
+            }
+            if (collision(playerClass.playerX, playerClass.playerY, playerClass.PLAYER_SIZE, playerClass.PLAYER_SIZE, platforms.get(i).x, platforms.get(i).y, platforms.get(i).width, platforms.get(i).height) && playerClass.playerVerticalSpeed > 0){
+                playerClass.playerY = platforms.get(i).y  - playerClass.PLAYER_SIZE;
+                playerClass.playerVerticalSpeed = 0;
             }
         }
     }
@@ -104,21 +94,21 @@ public class Canvas extends JFrame implements Runnable {
         }
     }
 
-
-
     class JPanelTest extends JPanel{
         public void paint(Graphics g){
 
             super.paint(g);
             Graphics2D g2 = (Graphics2D) g;
 
-            g2.setColor(Color.RED);
-            g2.fillRect(playerClass.playerX, playerClass.playerY, playerClass.PLAYER_SIZE, playerClass.PLAYER_SIZE);
+
 
             g2.setColor(Color.BLACK);
+
             for (int i = 0; i < platforms.size(); i++){
                 g2.fillRect(platforms.get(i).x, platforms.get(i).y, platforms.get(i).width, platforms.get(i).height);
             }
+            g2.setColor(Color.RED);
+            g2.fillRect(playerClass.playerX, playerClass.playerY, playerClass.PLAYER_SIZE, playerClass.PLAYER_SIZE);
         }
     }
 }

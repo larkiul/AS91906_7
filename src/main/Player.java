@@ -3,7 +3,7 @@ package main;
 public class Player {
     KeyInput keyInput = new KeyInput();
     final int PLAYER_SIZE = 20;
-    final int JUMP_STRENGTH = -15;
+    final int JUMP_STRENGTH = -17;
     final int CANVAS_WIDTH = 800;
     final int CANVAS_HEIGHT = 800;
     final int TERMINAL_VEL = 35;
@@ -15,6 +15,7 @@ public class Player {
     public int gravity = 1;
     public int jumpDelay = 0;
     public boolean buttonHeld = false;
+    public boolean topCol = false;
 
     public void playerMove() {
 
@@ -43,7 +44,7 @@ public class Player {
             buttonHeld = true;
             jumpDelay = 35;
             playerVerticalSpeed = JUMP_STRENGTH;
-            playerY += playerVerticalSpeed;
+            //playerY += playerVerticalSpeed;
         }
 
         if (!keyInput.upPressed){
