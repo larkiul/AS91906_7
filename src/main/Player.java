@@ -2,7 +2,7 @@ package main;
 
 public class Player {
     KeyInput keyInput = new KeyInput();
-    final int PLAYER_SIZE = 20;
+    final int PLAYER_SIZE = 50;
     final int JUMP_STRENGTH = -17;
     final int CANVAS_WIDTH = 800;
     final int CANVAS_HEIGHT = 800;

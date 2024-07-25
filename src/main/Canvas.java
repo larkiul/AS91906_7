@@ -8,8 +8,11 @@ import java.util.ArrayList;
 
 public class Canvas extends JFrame implements Runnable {
     Player playerClass = new Player();
-    public final int CANVAS_WIDTH = 800;
-    public final int CANVAS_HEIGHT = 800;
+    public int TILE_SIZE = 50;
+    public int tileCount = 20;
+    public final int CANVAS_WIDTH = TILE_SIZE * tileCount;
+    public final int CANVAS_HEIGHT = TILE_SIZE * tileCount;
+
     public int platformSpeed = 3;
     final int FPS = 60;
     ArrayList<Platform> platforms = new ArrayList<Platform>();
@@ -28,12 +31,24 @@ public class Canvas extends JFrame implements Runnable {
         this.addKeyListener(playerClass.keyInput);
         this.setFocusable(true);
 
-        platforms.add(new Platform(0, 700, CANVAS_WIDTH, 100));
+        platforms.add(new Platform(0, 700, CANVAS_WIDTH, CANVAS_HEIGHT));
         platforms.add(new Platform((int) (Math.floor(Math.random() * CANVAS_WIDTH) + CANVAS_WIDTH), (int) (Math.floor(Math.random() * 200) + 500), 100, 10));
         platforms.add(new Platform((int) (Math.floor(Math.random() * CANVAS_WIDTH) + CANVAS_WIDTH), (int) (Math.floor(Math.random() * 200) + 500), 100, 10));
         platforms.add(new Platform((int) (Math.floor(Math.random() * CANVAS_WIDTH) + CANVAS_WIDTH), (int) (Math.floor(Math.random() * 200) + 500), 100, 10));
         platforms.add(new Platform((int) (Math.floor(Math.random() * CANVAS_WIDTH) + CANVAS_WIDTH), (int) (Math.floor(Math.random() * 200) + 500), 100, 10));
         platforms.add(new Platform((int) (Math.floor(Math.random() * CANVAS_WIDTH) + CANVAS_WIDTH), (int) (Math.floor(Math.random() * 200) + 500), 100, 10));
+        platforms.add(new Platform((int) (Math.floor(Math.random() * CANVAS_WIDTH) + CANVAS_WIDTH), (int) (Math.floor(Math.random() * 200) + 500), 100, 10));
+        platforms.add(new Platform((int) (Math.floor(Math.random() * CANVAS_WIDTH) + CANVAS_WIDTH), (int) (Math.floor(Math.random() * 200) + 500), 100, 10));
+        platforms.add(new Platform((int) (Math.floor(Math.random() * CANVAS_WIDTH) + CANVAS_WIDTH), (int) (Math.floor(Math.random() * 200) + 500), 100, 10));
+        platforms.add(new Platform((int) (Math.floor(Math.random() * CANVAS_WIDTH) + CANVAS_WIDTH), (int) (Math.floor(Math.random() * 200) + 500), 100, 10));
+        platforms.add(new Platform((int) (Math.floor(Math.random() * CANVAS_WIDTH) + CANVAS_WIDTH), (int) (Math.floor(Math.random() * 200) + 500), 100, 10));
+        platforms.add(new Platform((int) (Math.floor(Math.random() * CANVAS_WIDTH) + CANVAS_WIDTH), (int) (Math.floor(Math.random() * 200) + 500), 100, 10));
+        platforms.add(new Platform((int) (Math.floor(Math.random() * CANVAS_WIDTH) + CANVAS_WIDTH), (int) (Math.floor(Math.random() * 200) + 500), 100, 10));
+        platforms.add(new Platform((int) (Math.floor(Math.random() * CANVAS_WIDTH) + CANVAS_WIDTH), (int) (Math.floor(Math.random() * 200) + 500), 100, 10));
+        platforms.add(new Platform((int) (Math.floor(Math.random() * CANVAS_WIDTH) + CANVAS_WIDTH), (int) (Math.floor(Math.random() * 200) + 500), 100, 10));
+        platforms.add(new Platform((int) (Math.floor(Math.random() * CANVAS_WIDTH) + CANVAS_WIDTH), (int) (Math.floor(Math.random() * 200) + 500), 100, 10));
+        platforms.add(new Platform((int) (Math.floor(Math.random() * CANVAS_WIDTH) + CANVAS_WIDTH), (int) (Math.floor(Math.random() * 200) + 500), 100, 10));
+
     }
 
     public void startGameThread() { // Initialise the thread
@@ -75,7 +90,6 @@ public class Canvas extends JFrame implements Runnable {
 
         playerClass.playerMove();
 
-        //System.out.println(platforms);
 
         for (int i = 0; i < platforms.size(); i++){
             platforms.get(i).x -= platformSpeed;
@@ -113,6 +127,12 @@ public class Canvas extends JFrame implements Runnable {
 
             for (int i = 0; i < platforms.size(); i++){
                 g2.fillRect(platforms.get(i).x, platforms.get(i).y, platforms.get(i).width, platforms.get(i).height);
+            }
+            for (int i = 0; i < CANVAS_WIDTH; i += TILE_SIZE){
+                g2.drawLine(i, 0, i, CANVAS_HEIGHT);
+            }
+            for (int i = 0; i < CANVAS_WIDTH; i += TILE_SIZE){
+                g2.drawLine(0, i, CANVAS_WIDTH, i);
             }
             g2.setColor(Color.RED);
             g2.fillRect(playerClass.playerX, playerClass.playerY, playerClass.PLAYER_SIZE, playerClass.PLAYER_SIZE);
