@@ -14,8 +14,12 @@ public class Canvas extends JFrame implements Runnable {
     public final int CANVAS_HEIGHT = TILE_SIZE * tileCount;
 
     public int platformSpeed = 3;
+    public int[] spikeX = {0, 25, 50};
+    public int[] spikeY = {700, 650, 700};
+    Polygon spike = new Polygon(spikeX, spikeY, 3);
     final int FPS = 60;
     ArrayList<Platform> platforms = new ArrayList<Platform>();
+    ArrayList<Polygon> spikes = new ArrayList<Polygon>();
     Thread gameThread; // This thread allows for the game to be run while all other aspects can still work, like the paint method
 
     public Canvas() {
@@ -38,16 +42,8 @@ public class Canvas extends JFrame implements Runnable {
         platforms.add(new Platform((int) (Math.floor(Math.random() * CANVAS_WIDTH) + CANVAS_WIDTH), (int) (Math.floor(Math.random() * 200) + 500), 100, 10));
         platforms.add(new Platform((int) (Math.floor(Math.random() * CANVAS_WIDTH) + CANVAS_WIDTH), (int) (Math.floor(Math.random() * 200) + 500), 100, 10));
         platforms.add(new Platform((int) (Math.floor(Math.random() * CANVAS_WIDTH) + CANVAS_WIDTH), (int) (Math.floor(Math.random() * 200) + 500), 100, 10));
-        platforms.add(new Platform((int) (Math.floor(Math.random() * CANVAS_WIDTH) + CANVAS_WIDTH), (int) (Math.floor(Math.random() * 200) + 500), 100, 10));
-        platforms.add(new Platform((int) (Math.floor(Math.random() * CANVAS_WIDTH) + CANVAS_WIDTH), (int) (Math.floor(Math.random() * 200) + 500), 100, 10));
-        platforms.add(new Platform((int) (Math.floor(Math.random() * CANVAS_WIDTH) + CANVAS_WIDTH), (int) (Math.floor(Math.random() * 200) + 500), 100, 10));
-        platforms.add(new Platform((int) (Math.floor(Math.random() * CANVAS_WIDTH) + CANVAS_WIDTH), (int) (Math.floor(Math.random() * 200) + 500), 100, 10));
-        platforms.add(new Platform((int) (Math.floor(Math.random() * CANVAS_WIDTH) + CANVAS_WIDTH), (int) (Math.floor(Math.random() * 200) + 500), 100, 10));
-        platforms.add(new Platform((int) (Math.floor(Math.random() * CANVAS_WIDTH) + CANVAS_WIDTH), (int) (Math.floor(Math.random() * 200) + 500), 100, 10));
-        platforms.add(new Platform((int) (Math.floor(Math.random() * CANVAS_WIDTH) + CANVAS_WIDTH), (int) (Math.floor(Math.random() * 200) + 500), 100, 10));
-        platforms.add(new Platform((int) (Math.floor(Math.random() * CANVAS_WIDTH) + CANVAS_WIDTH), (int) (Math.floor(Math.random() * 200) + 500), 100, 10));
-        platforms.add(new Platform((int) (Math.floor(Math.random() * CANVAS_WIDTH) + CANVAS_WIDTH), (int) (Math.floor(Math.random() * 200) + 500), 100, 10));
-        platforms.add(new Platform((int) (Math.floor(Math.random() * CANVAS_WIDTH) + CANVAS_WIDTH), (int) (Math.floor(Math.random() * 200) + 500), 100, 10));
+        spikes.add(new Polygon(spikeX, spikeY, 3));
+
 
     }
 
@@ -128,12 +124,16 @@ public class Canvas extends JFrame implements Runnable {
             for (int i = 0; i < platforms.size(); i++){
                 g2.fillRect(platforms.get(i).x, platforms.get(i).y, platforms.get(i).width, platforms.get(i).height);
             }
+            for (int i = 0; i < spikes.size(); i++){
+                g2.fillPolygon(spikes.get(i));
+            }
             for (int i = 0; i < CANVAS_WIDTH; i += TILE_SIZE){
                 g2.drawLine(i, 0, i, CANVAS_HEIGHT);
             }
             for (int i = 0; i < CANVAS_WIDTH; i += TILE_SIZE){
                 g2.drawLine(0, i, CANVAS_WIDTH, i);
             }
+            //g2.fillPolygon(spike);
             g2.setColor(Color.RED);
             g2.fillRect(playerClass.playerX, playerClass.playerY, playerClass.PLAYER_SIZE, playerClass.PLAYER_SIZE);
         }
