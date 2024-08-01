@@ -45,17 +45,19 @@ public class Canvas extends JFrame implements Runnable {
     public int[] spikeY3 = {600, 555, 600};
     public int[] spikeY4 = {550, 505, 550};
     public int[] spikeY5 = {500, 455, 500};
+    public int finishLine = CANVAS_WIDTH + TILE_SIZE * 75;
+    public boolean win = false;
 
     public int[] platformsX = {6, 9, 15, 16, 17, 18, 20, 20, 21, 21, 22, 22, 23, 23, 24,
                                 24, 25, 25, 26, 26, 30, 30, 31, 35, 36, 37, 38, 39, 40, 41,
                                 42, 43, 44, 45, 46, 47, 52, 53, 54, 55, 56, 57, 58, 59, 60,
                                 61, 62, 63, 64, 65, 65, 57, 58, 59, 60, 61, 62, 63, 64, 65,
-                                60, 61, 62, 63, 64, 65};
+                                60, 61, 62, 63, 64, 65, 66, 66, 66, 67, 67, 68};
     public int[] platformsY = {650, 650, 650, 650, 650, 650, 600, 650, 600, 650, 600, 650, 600, 650, 600,
                                 650, 600, 650, 600, 650, 600, 650, 650, 450, 450, 450, 450, 450, 450, 450,
                                 450, 450, 450, 450, 450, 450, 600, 600, 600, 600, 600, 600, 600, 600, 600,
                                 600, 600, 600, 600, 600, 650, 550, 550, 550, 550, 550, 550, 550, 550, 550,
-                                500, 500, 500, 500, 500, 500};
+                                500, 500, 500, 500, 500, 500, 550, 600, 650, 600, 650, 650};
     public boolean gameOver = false;
     final int FPS = 60;
     ArrayList<Platform> platforms = new ArrayList<>();
@@ -81,6 +83,10 @@ public class Canvas extends JFrame implements Runnable {
             platforms.add(new Platform(CANVAS_WIDTH + TILE_SIZE * platformsX[i], platformsY[i], TILE_SIZE, TILE_SIZE));
         }
 
+        AddSpike();
+    }
+
+    private void AddSpike() {
         spikeX.add(spike1);
         spikeX.add(spike2);
         spikeX.add(spike3);
@@ -137,7 +143,7 @@ public class Canvas extends JFrame implements Runnable {
             lastTime = currentTime; // Last time is updated
 
             if (delta >= 1) { // Only once delta reaches 1 or more, is a new frame drawn, this happens 60 times per second in my game
-                if (!gameOver) {
+                if (!gameOver && !win) {
                     update();
                 }
                 repaint();
@@ -147,7 +153,10 @@ public class Canvas extends JFrame implements Runnable {
     }
 
     public void update() {
-
+        finishLine -= platformSpeed;
+        if (playerClass.playerX >= finishLine){
+            win = true;
+        }
         playerClass.playerMove();
         for (int i = 0; i < spike1.length; i++){
 
@@ -205,14 +214,18 @@ public class Canvas extends JFrame implements Runnable {
                 platforms.get(i).x += platformSpeed;
             }
             if (collision(playerClass.playerX, playerClass.playerY, playerClass.PLAYER_SIZE, playerClass.PLAYER_SIZE, platforms.get(i).x, platforms.get(i).y, platforms.get(i).width, platforms.get(i).height)){
+                playerClass.onGround = true;
                 if (playerClass.playerY + playerClass.PLAYER_SIZE <= platforms.get(i).y + 20) {
                     playerClass.playerY = platforms.get(i).y - playerClass.PLAYER_SIZE;
                     playerClass.playerVerticalSpeed = 0;
+
                 }else if (playerClass.playerY == platforms.get(i).y + platforms.get(i).height) {
 
                 }else{
                     gameOver = true;
                 }
+            } else {
+
             }
         }
     }
@@ -250,12 +263,16 @@ public class Canvas extends JFrame implements Runnable {
                 g2.drawPolygon(spikes.get(i));
             }
 
+            g2.setColor(Color.YELLOW);
+            g2.fillRect(finishLine, 0, TILE_SIZE, platforms.getFirst().y);
+
             g2.setColor(new Color(100, 227, 68));
             g2.fillRect(playerClass.playerX, playerClass.playerY, playerClass.PLAYER_SIZE, playerClass.PLAYER_SIZE);
             g2.setColor(new Color(72, 153, 43));
             g2.setStroke(new BasicStroke(3));
             g2.drawRect(playerClass.playerX, playerClass.playerY, playerClass.PLAYER_SIZE, playerClass.PLAYER_SIZE);
             g2.setStroke(new BasicStroke(1));
+
             for (int i = 0; i < platforms.size(); i++){
                 if (i == 0){
                     g2.setColor(new Color(8, 22, 92));
@@ -274,12 +291,17 @@ public class Canvas extends JFrame implements Runnable {
                 }
             }
 
-            if (gameOver){
+            if (gameOver || win){
                 g2.setColor(new Color(109, 184, 227));
                 g2.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
                 g2.setColor(Color.BLACK);
                 g2.setFont(new Font("Century Gothic", 1, 100));
-                g2.drawString("You Died!", CANVAS_WIDTH / 2 - g2.getFontMetrics().stringWidth("You Died!") / 2, CANVAS_HEIGHT / 3);
+                if (gameOver) {
+                    g2.drawString("You Died!", CANVAS_WIDTH / 2 - g2.getFontMetrics().stringWidth("You Died!") / 2, CANVAS_HEIGHT / 3);
+                }
+                if (win){
+                    g2.drawString("You Win!", CANVAS_WIDTH / 2 - g2.getFontMetrics().stringWidth("You Win!") / 2, CANVAS_HEIGHT / 3);
+                }
             }
         }
     }

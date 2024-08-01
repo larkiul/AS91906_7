@@ -14,12 +14,11 @@ public class Player {
     public int gravity = 1;
     public int jumpDelay = 0;
     public boolean buttonHeld = false;
+    public boolean onGround;
 
     public void playerMove() {
 
         fall();
-
-        //playerX += playerHorizontalSpeed;
 
         if (keyInput.leftPressed){
             playerHorizontalSpeed = -2;
@@ -38,27 +37,22 @@ public class Player {
 
     public void fall(){
 
-        if (keyInput.upPressed && jumpDelay == 0 && !buttonHeld) {
+        if (keyInput.upPressed && !buttonHeld && onGround) {
             buttonHeld = true;
+            onGround = false;
             jumpDelay = 35;
             playerVerticalSpeed = JUMP_STRENGTH;
-            //playerY += playerVerticalSpeed;
         }
 
         if (!keyInput.upPressed){
             buttonHeld = false;
         }
 
-        //if (playerY + PLAYER_SIZE < ground.y) {
-            if (playerVerticalSpeed < TERMINAL_VEL) {
-                playerVerticalSpeed += gravity;
-            }
-            playerY += playerVerticalSpeed;
-        //}
-
-        if (jumpDelay > 0){
-            jumpDelay--;
+        if (playerVerticalSpeed < TERMINAL_VEL) {
+            playerVerticalSpeed += gravity;
         }
+        playerY += playerVerticalSpeed;
+
     }
 
     public void playerCollisions(){
