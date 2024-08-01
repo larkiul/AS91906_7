@@ -13,10 +13,49 @@ public class Canvas extends JFrame implements Runnable {
     public int tileCount = 20;
     public final int CANVAS_WIDTH = TILE_SIZE * tileCount;
     public final int CANVAS_HEIGHT = TILE_SIZE * tileCount;
-    public int platformSpeed = 4;
-    public int[] spike1 = {CANVAS_WIDTH + TILE_SIZE * 2, CANVAS_WIDTH + TILE_SIZE * 2 + TILE_SIZE / 2, CANVAS_WIDTH + TILE_SIZE * 2 + TILE_SIZE};
-    public int[] spike2 = {CANVAS_WIDTH + TILE_SIZE * 3, CANVAS_WIDTH + TILE_SIZE * 3 + TILE_SIZE / 2, CANVAS_WIDTH + TILE_SIZE * 3 + TILE_SIZE};
-    public int[] spikeY = {700, 650, 700};
+    public int platformSpeed = 5;
+    public int[] spike1 = {CANVAS_WIDTH + TILE_SIZE * 7, CANVAS_WIDTH + TILE_SIZE * 7 + TILE_SIZE / 2, CANVAS_WIDTH + TILE_SIZE * 7 + TILE_SIZE};
+    public int[] spike2 = {CANVAS_WIDTH + TILE_SIZE * 8, CANVAS_WIDTH + TILE_SIZE * 8 + TILE_SIZE / 2, CANVAS_WIDTH + TILE_SIZE * 8 + TILE_SIZE};
+    public int[] spike3 = {CANVAS_WIDTH + TILE_SIZE, CANVAS_WIDTH + TILE_SIZE + TILE_SIZE / 2, CANVAS_WIDTH + TILE_SIZE + TILE_SIZE};
+    public int[] spike4 = {CANVAS_WIDTH + TILE_SIZE * 19, CANVAS_WIDTH + TILE_SIZE * 19 + TILE_SIZE / 2, CANVAS_WIDTH + TILE_SIZE * 19 + TILE_SIZE};
+    public int[] spike5 = {CANVAS_WIDTH + TILE_SIZE * 27, CANVAS_WIDTH + TILE_SIZE * 27 + TILE_SIZE / 2, CANVAS_WIDTH + TILE_SIZE * 27 + TILE_SIZE};
+    public int[] spike6 = {CANVAS_WIDTH + TILE_SIZE * 28, CANVAS_WIDTH + TILE_SIZE * 28 + TILE_SIZE / 2, CANVAS_WIDTH + TILE_SIZE * 28 + TILE_SIZE};
+    public int[] spike7 = {CANVAS_WIDTH + TILE_SIZE * 29, CANVAS_WIDTH + TILE_SIZE * 29 + TILE_SIZE / 2, CANVAS_WIDTH + TILE_SIZE * 29 + TILE_SIZE};
+    public int[] spike8 = {CANVAS_WIDTH + TILE_SIZE * 35, CANVAS_WIDTH + TILE_SIZE * 35 + TILE_SIZE / 2, CANVAS_WIDTH + TILE_SIZE * 35 + TILE_SIZE};
+    public int[] spike9 = {CANVAS_WIDTH + TILE_SIZE * 36, CANVAS_WIDTH + TILE_SIZE * 36 + TILE_SIZE / 2, CANVAS_WIDTH + TILE_SIZE * 36 + TILE_SIZE};
+    public int[] spike10 = {CANVAS_WIDTH + TILE_SIZE * 37, CANVAS_WIDTH + TILE_SIZE * 37 + TILE_SIZE / 2, CANVAS_WIDTH + TILE_SIZE * 37 + TILE_SIZE};
+    public int[] spike11 = {CANVAS_WIDTH + TILE_SIZE * 38, CANVAS_WIDTH + TILE_SIZE * 38 + TILE_SIZE / 2, CANVAS_WIDTH + TILE_SIZE * 38 + TILE_SIZE};
+    public int[] spike12 = {CANVAS_WIDTH + TILE_SIZE * 39, CANVAS_WIDTH + TILE_SIZE * 39 + TILE_SIZE / 2, CANVAS_WIDTH + TILE_SIZE * 39 + TILE_SIZE};
+    public int[] spike13 = {CANVAS_WIDTH + TILE_SIZE * 40, CANVAS_WIDTH + TILE_SIZE * 40 + TILE_SIZE / 2, CANVAS_WIDTH + TILE_SIZE * 40 + TILE_SIZE};
+    public int[] spike14 = {CANVAS_WIDTH + TILE_SIZE * 41, CANVAS_WIDTH + TILE_SIZE * 41 + TILE_SIZE / 2, CANVAS_WIDTH + TILE_SIZE * 41 + TILE_SIZE};
+    public int[] spike15 = {CANVAS_WIDTH + TILE_SIZE * 42, CANVAS_WIDTH + TILE_SIZE * 42 + TILE_SIZE / 2, CANVAS_WIDTH + TILE_SIZE * 42 + TILE_SIZE};
+    public int[] spike16 = {CANVAS_WIDTH + TILE_SIZE * 43, CANVAS_WIDTH + TILE_SIZE * 43 + TILE_SIZE / 2, CANVAS_WIDTH + TILE_SIZE * 43 + TILE_SIZE};
+    public int[] spike17 = {CANVAS_WIDTH + TILE_SIZE * 44, CANVAS_WIDTH + TILE_SIZE * 44 + TILE_SIZE / 2, CANVAS_WIDTH + TILE_SIZE * 44 + TILE_SIZE};
+    public int[] spike18 = {CANVAS_WIDTH + TILE_SIZE * 45, CANVAS_WIDTH + TILE_SIZE * 45 + TILE_SIZE / 2, CANVAS_WIDTH + TILE_SIZE * 45 + TILE_SIZE};
+    public int[] spike19 = {CANVAS_WIDTH + TILE_SIZE * 46, CANVAS_WIDTH + TILE_SIZE * 46 + TILE_SIZE / 2, CANVAS_WIDTH + TILE_SIZE * 46 + TILE_SIZE};
+    public int[] spike20 = {CANVAS_WIDTH + TILE_SIZE * 47, CANVAS_WIDTH + TILE_SIZE * 47 + TILE_SIZE / 2, CANVAS_WIDTH + TILE_SIZE * 47 + TILE_SIZE};
+    public int[] spike21 = {CANVAS_WIDTH + TILE_SIZE * 55, CANVAS_WIDTH + TILE_SIZE * 55 + TILE_SIZE / 2, CANVAS_WIDTH + TILE_SIZE * 55 + TILE_SIZE};
+    public int[] spike22 = {CANVAS_WIDTH + TILE_SIZE * 56, CANVAS_WIDTH + TILE_SIZE * 56 + TILE_SIZE / 2, CANVAS_WIDTH + TILE_SIZE * 56 + TILE_SIZE};
+    public int[] spike23 = {CANVAS_WIDTH + TILE_SIZE * 58, CANVAS_WIDTH + TILE_SIZE * 58 + TILE_SIZE / 2, CANVAS_WIDTH + TILE_SIZE * 58 + TILE_SIZE};
+    public int[] spike24 = {CANVAS_WIDTH + TILE_SIZE * 59, CANVAS_WIDTH + TILE_SIZE * 59 + TILE_SIZE / 2, CANVAS_WIDTH + TILE_SIZE * 59 + TILE_SIZE};
+    public int[] spike25 = {CANVAS_WIDTH + TILE_SIZE * 61, CANVAS_WIDTH + TILE_SIZE * 61 + TILE_SIZE / 2, CANVAS_WIDTH + TILE_SIZE * 61 + TILE_SIZE};
+    public int[] spike26 = {CANVAS_WIDTH + TILE_SIZE * 62, CANVAS_WIDTH + TILE_SIZE * 62 + TILE_SIZE / 2, CANVAS_WIDTH + TILE_SIZE * 62 + TILE_SIZE};
+    public int[] spikeY = {700, 655, 700};
+    public int[] spikeY2 = {500, 545, 500};
+    public int[] spikeY3 = {600, 555, 600};
+    public int[] spikeY4 = {550, 505, 550};
+    public int[] spikeY5 = {500, 455, 500};
+
+    public int[] platformsX = {6, 9, 15, 16, 17, 18, 20, 20, 21, 21, 22, 22, 23, 23, 24,
+                                24, 25, 25, 26, 26, 30, 30, 31, 35, 36, 37, 38, 39, 40, 41,
+                                42, 43, 44, 45, 46, 47, 52, 53, 54, 55, 56, 57, 58, 59, 60,
+                                61, 62, 63, 64, 65, 65, 57, 58, 59, 60, 61, 62, 63, 64, 65,
+                                60, 61, 62, 63, 64, 65};
+    public int[] platformsY = {650, 650, 650, 650, 650, 650, 600, 650, 600, 650, 600, 650, 600, 650, 600,
+                                650, 600, 650, 600, 650, 600, 650, 650, 450, 450, 450, 450, 450, 450, 450,
+                                450, 450, 450, 450, 450, 450, 600, 600, 600, 600, 600, 600, 600, 600, 600,
+                                600, 600, 600, 600, 600, 650, 550, 550, 550, 550, 550, 550, 550, 550, 550,
+                                500, 500, 500, 500, 500, 500};
     public boolean gameOver = false;
     final int FPS = 60;
     ArrayList<Platform> platforms = new ArrayList<>();
@@ -38,13 +77,36 @@ public class Canvas extends JFrame implements Runnable {
         this.setFocusable(true);
 
         platforms.add(new Platform(0, 700, CANVAS_WIDTH, CANVAS_HEIGHT));
-        platforms.add(new Platform(CANVAS_WIDTH + TILE_SIZE, 650, TILE_SIZE, TILE_SIZE));
-        //platforms.add(new Platform(CANVAS_WIDTH + TILE_SIZE * 2, 650, TILE_SIZE, TILE_SIZE));
+        for (int i = 0; i < platformsX.length; i++) {
+            platforms.add(new Platform(CANVAS_WIDTH + TILE_SIZE * platformsX[i], platformsY[i], TILE_SIZE, TILE_SIZE));
+        }
 
         spikeX.add(spike1);
         spikeX.add(spike2);
-
-
+        spikeX.add(spike3);
+        spikeX.add(spike4);
+        spikeX.add(spike5);
+        spikeX.add(spike6);
+        spikeX.add(spike7);
+        spikeX.add(spike8);
+        spikeX.add(spike9);
+        spikeX.add(spike10);
+        spikeX.add(spike11);
+        spikeX.add(spike12);
+        spikeX.add(spike13);
+        spikeX.add(spike14);
+        spikeX.add(spike15);
+        spikeX.add(spike16);
+        spikeX.add(spike17);
+        spikeX.add(spike18);
+        spikeX.add(spike19);
+        spikeX.add(spike20);
+        spikeX.add(spike21);
+        spikeX.add(spike22);
+        spikeX.add(spike23);
+        spikeX.add(spike24);
+        spikeX.add(spike25);
+        spikeX.add(spike26);
     }
 
     public void startGameThread() { // Initialise the thread
@@ -88,12 +150,47 @@ public class Canvas extends JFrame implements Runnable {
 
         playerClass.playerMove();
         for (int i = 0; i < spike1.length; i++){
+
             spike1[i] -= platformSpeed;
             spike2[i] -= platformSpeed;
+            spike3[i] -= platformSpeed;
+            spike4[i] -= platformSpeed;
+            spike5[i] -= platformSpeed;
+            spike6[i] -= platformSpeed;
+            spike7[i] -= platformSpeed;
+            spike8[i] -= platformSpeed;
+            spike9[i] -= platformSpeed;
+            spike10[i] -= platformSpeed;
+            spike11[i] -= platformSpeed;
+            spike12[i] -= platformSpeed;
+            spike13[i] -= platformSpeed;
+            spike14[i] -= platformSpeed;
+            spike15[i] -= platformSpeed;
+            spike16[i] -= platformSpeed;
+            spike17[i] -= platformSpeed;
+            spike18[i] -= platformSpeed;
+            spike19[i] -= platformSpeed;
+            spike20[i] -= platformSpeed;
+            spike21[i] -= platformSpeed;
+            spike22[i] -= platformSpeed;
+            spike23[i] -= platformSpeed;
+            spike24[i] -= platformSpeed;
+            spike25[i] -= platformSpeed;
+            spike26[i] -= platformSpeed;
         }
         spikes.clear();
         for (int i = 0; i < spikeX.size(); i++){
-            spikes.add(new Polygon(spikeX.get(i), spikeY, 3));
+            if (i == 7 || i == 8 || i == 9 || i == 12 || i == 13 || i == 14 || i == 17 || i == 18 || i == 19){
+                spikes.add(new Polygon(spikeX.get(i), spikeY2, 3));
+            }else if (i == 20 || i == 21){
+                spikes.add(new Polygon(spikeX.get(i), spikeY3, 3));
+            }else if (i == 22 || i == 23){
+                spikes.add(new Polygon(spikeX.get(i), spikeY4, 3));
+            }else if (i == 24 || i == 25){
+                spikes.add(new Polygon(spikeX.get(i), spikeY5, 3));
+            } else{
+                spikes.add(new Polygon(spikeX.get(i), spikeY, 3));
+            }
             if (spikes.get(i).intersects(playerClass.playerX, playerClass.playerY, playerClass.PLAYER_SIZE, playerClass.PLAYER_SIZE)){
                 gameOver = true;
             }
@@ -111,14 +208,16 @@ public class Canvas extends JFrame implements Runnable {
                 if (playerClass.playerY + playerClass.PLAYER_SIZE <= platforms.get(i).y + 20) {
                     playerClass.playerY = platforms.get(i).y - playerClass.PLAYER_SIZE;
                     playerClass.playerVerticalSpeed = 0;
-                } else{
+                }else if (playerClass.playerY == platforms.get(i).y + platforms.get(i).height) {
+
+                }else{
                     gameOver = true;
                 }
             }
         }
     }
 
-    public Boolean collision(int x1, int y1, int w1, int h1, int x2, int y2, int w2, int h2){
+    public boolean collision(int x1, int y1, int w1, int h1, int x2, int y2, int w2, int h2){
         if (x1 + w1 >= x2 && x1 <= x2 + w2 && y1 + h1 > y2 && y1 <= y2 + h2){
             return true;
         } else {
@@ -142,18 +241,39 @@ public class Canvas extends JFrame implements Runnable {
             for (int i = 0; i < CANVAS_WIDTH; i += TILE_SIZE){
                 g2.drawLine(0, i, CANVAS_WIDTH, i);
             }
-            g2.setColor(Color.BLACK);
-            for (int i = 0; i < platforms.size(); i++){
-                g2.fillRect(platforms.get(i).x, platforms.get(i).y, platforms.get(i).width, platforms.get(i).height);
-            }
+            //g2.setColor(new Color(24, 33, 122));
             for (int i = 0; i < spikes.size(); i++){
+                g2.setColor(new Color(173, 9, 3));
                 g2.fillPolygon(spikes.get(i));
+                g2.setColor(new Color(199, 45, 40));
+                g2.setStroke(new BasicStroke(3));
+                g2.drawPolygon(spikes.get(i));
             }
 
             g2.setColor(new Color(100, 227, 68));
             g2.fillRect(playerClass.playerX, playerClass.playerY, playerClass.PLAYER_SIZE, playerClass.PLAYER_SIZE);
-            g2.setColor(Color.black);
+            g2.setColor(new Color(72, 153, 43));
+            g2.setStroke(new BasicStroke(3));
             g2.drawRect(playerClass.playerX, playerClass.playerY, playerClass.PLAYER_SIZE, playerClass.PLAYER_SIZE);
+            g2.setStroke(new BasicStroke(1));
+            for (int i = 0; i < platforms.size(); i++){
+                if (i == 0){
+                    g2.setColor(new Color(8, 22, 92));
+                    g2.fillRect(platforms.get(i).x, platforms.get(i).y, platforms.get(i).width, platforms.get(i).height);
+                    g2.setColor(new Color(50, 62, 117));
+                    g2.setStroke(new BasicStroke(3));
+                    g2.drawRect(platforms.get(i).x - 2, platforms.get(i).y - 2, platforms.get(i).width, platforms.get(i).height);
+                    g2.setStroke(new BasicStroke(1));
+                } else {
+                    g2.setColor(new Color(8, 22, 92));
+                    g2.fillRect(platforms.get(i).x, platforms.get(i).y, platforms.get(i).width, platforms.get(i).height);
+                    g2.setColor(new Color(50, 62, 117));
+                    g2.setStroke(new BasicStroke(3));
+                    g2.drawRect(platforms.get(i).x - 2, platforms.get(i).y - 2, platforms.get(i).width, platforms.get(i).height);
+                    g2.setStroke(new BasicStroke(1));
+                }
+            }
+
             if (gameOver){
                 g2.setColor(new Color(109, 184, 227));
                 g2.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
